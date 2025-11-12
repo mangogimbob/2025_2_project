@@ -685,7 +685,7 @@ int main(void) {
     };
     int numEnemies = sizeof(enemies) / sizeof(enemies[0]);     // 적 템플릿 수
 
-    Character boss = { "거대 슬라임", 200, 200, 18, 10, 7, 0.1, 1.5, 0, 0 };
+    Character boss = { "이홍래 교수님", 200, 200, 18, 10, 7, 0.1, 1.5, 0, 0 };
 
 
     Blessing candidates[3];      // 축복 후보 3개 선택
