@@ -825,7 +825,7 @@ int main(void) {
     player.isDefending = 0;
     player.defenseCooldown = 0;
 
-    if (strcmp(player.name, "scjj") == 0) {
+    if (strcmp(player.name, "cheat") == 0) {
 		player.maxHp = player.hp = 9999;
     }
 
