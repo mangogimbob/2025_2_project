@@ -739,7 +739,12 @@ void processEnemyAction(Character* enemy, Character* player) {      //적 행동
             if (rand() % 100 < 25) {        //25퍼
                 enemy->isCharging = 1;
                 textcolor(14); // 노랑
-                printf("    바위 골렘이 육중한 팔을 들어 올립니다!!\n");
+                if (strstr(enemy->name, "바위") != NULL) {
+                    printf("    바위 골렘이 육중한 팔을 들어 올립니다!!\n");
+                }
+                else if (strstr(enemy->name, "얼음") != NULL) {
+                    printf("    얼음 골렘이 한기를 내뿜습니다!!\n");
+                }
                 textcolor(15);
                 return;
             }
@@ -896,12 +901,12 @@ int main(void) {
     pauseLine();
 
     int battleCount = 0;
-    while (battleCount < 5) {
+    while (battleCount < 7) {
         battleCount++;
 
         Character enemy;
 
-        if (battleCount == 5) {
+        if (battleCount == 7) {
             clearConsole();
             printf("==============================\n");
             printf("  보스 [");
@@ -1090,7 +1095,7 @@ int main(void) {
             printf("\n 전투에서 승리하였습니다!\n");
             pauseLine();
 
-            if (battleCount == 5) 
+            if (battleCount == 7) 
                 break; 
 
             for (int i = 0; i < 3; i++) {

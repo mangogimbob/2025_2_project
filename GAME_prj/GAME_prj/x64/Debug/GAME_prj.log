@@ -1,7 +1,7 @@
 ﻿  main.c
-C:\Users\신민기\Downloads\gitsample\GAME_prj\main.c(189,31): warning C4013: 'getEffectRemaining'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
-C:\Users\신민기\Downloads\gitsample\GAME_prj\main.c(553,100): warning C4474: 'printf' : 서식 문자열에 전달된 인수가 너무 많습니다.
-      C:\Users\신민기\Downloads\gitsample\GAME_prj\main.c(553,100):
+C:\Users\신민기\Downloads\gitsample\GAME_prj\main.c(188,31): warning C4013: 'getEffectRemaining'이(가) 정의되지 않았습니다. extern은 int형을 반환하는 것으로 간주합니다.
+C:\Users\신민기\Downloads\gitsample\GAME_prj\main.c(552,100): warning C4474: 'printf' : 서식 문자열에 전달된 인수가 너무 많습니다.
+      C:\Users\신민기\Downloads\gitsample\GAME_prj\main.c(552,100):
       자리 표시자 및 해당 매개 변수에는 variadic 인수가 0개 필요하지만 1개가 제공되었습니다.
   
   GAME_prj.vcxproj -> C:\Users\신민기\Downloads\gitsample\GAME_prj\x64\Debug\GAME_prj.exe
