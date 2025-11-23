@@ -805,9 +805,9 @@ int main(void) {
     playerInventory.count = 0; // 인벤토리 초기화
     addItemToInventory(&allItems[0]); // bandage 붕대
 
-    // addItemToInventory(&allItems[1]); // energy 에너지드링크
-    //addItemToInventory(&allItems[4]); // redpend 붉은 펜던트
-    //addItemToInventory(&allItems[5]); // ddakpend 딱정벌레 펜던트
+    addItemToInventory(&allItems[1]); // energy 에너지드링크
+    addItemToInventory(&allItems[4]); // redpend 붉은 펜던트
+    addItemToInventory(&allItems[5]); // ddakpend 딱정벌레 펜던트
 	addItemToInventory(&allItems[6]);   // chip 도박사의 칩
 
     Character player;
@@ -1171,15 +1171,15 @@ int main(void) {
         Sleep(500);
         printf("\n\n당신의 등급: ");
         Sleep(800);
-        if (all_dmg >= 700) {
+        if (all_dmg >= 900) {
 			textcolor(13);
 			printf("S+\n\n");
         }
-        else if (all_dmg >= 600) {
+        else if (all_dmg >= 700) {
             textcolor(13);
             printf("S\n\n");
         }
-        else if (all_dmg >=500) {
+        else if (all_dmg >=600) {
 			//노란색
 			textcolor(14);
 			printf("A+\n\n");
@@ -1188,7 +1188,7 @@ int main(void) {
 			textcolor(14);
 			printf("A\n\n");
         }
-        else
+        else if(all_dmg<400)
             textcolor(11);
 		    printf("B\n\n");
     }
