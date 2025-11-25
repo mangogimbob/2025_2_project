@@ -571,8 +571,7 @@ int coinFlip() {
 }
 
 void initBlessings(Blessing arr[], int n) {
-    // 배열 초기화 (이제 총 14개만 사용하므로 크기에 맞게 초기화)
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < n; i++) { // 배열 초기화 
         memset(&arr[i], 0, sizeof(Blessing));
     }
 
@@ -635,15 +634,14 @@ void applyBlessingSimple(Character* player, const Blessing* b, const Item allIte
     }
 
     if (strcmp(b->id, "gen_halfHP_atkUP") == 0) {
-        // atkPercent = 2.5 (2.5배가 됨)
+        // atkPercent = 2.5 
         player->atk = (int)(player->atk * b->atkPercent);
     }
 
-    // --- 기존 스탯 적용 로직 ---
     if (b->hpPercent != 0.0) {       // 최대 체력 증가/감소
         int oldMaxHp = player->maxHp;
         player->maxHp += (int)(oldMaxHp * b->hpPercent);
-        if (player->maxHp < 1) player->maxHp = 1; // 체력이 0이 되는 것 방지
+        if (player->maxHp < 1) player->maxHp = 1; // 체력 0 방지
         player->hp = player->maxHp; // 체력 완전 회복
     }
 
