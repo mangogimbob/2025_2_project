@@ -909,11 +909,11 @@ int main(void) {
         if (battleCount == 7) {
             clearConsole();
             printf("==============================\n");
-            printf("  보스 [");
+            printf("어둠속에서 ");
             textcolor(12);
             printf("%s", boss.name);
             textcolor(15);
-            printf("] 등장!\n");
+            printf("가 나타났습니다.\n");
             printf("==============================\n");
             enemy = boss;
             pauseLine();
