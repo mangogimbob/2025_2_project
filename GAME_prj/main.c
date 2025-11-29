@@ -85,17 +85,16 @@ void drawBattleUI(const Character* player, const Character* enemy, double pGauge
     printf("-------------------------------------------------------------------------------------\n");
     printf("|   [행동 순서] >>");
 
-    // 시뮬레이션용 임시 변수 생성
-    double simP = pGauge;
+    double simP = pGauge;           
     double simE = eGauge;
     double pSpd = (player->spd > 0) ? player->spd : 1.0;
     double eSpd = (enemy->spd > 0) ? enemy->spd : 1.0;
 
-	for (int i = 0; i < 5; i++) {       //현재를 기점으로 앞으로의 5턴의 행동 순서 계산
-		double neededP = (simP >= 100.0) ? 0.0 : (100.0 - simP);    //플레이어의 행동게이지가 100이 될 때까지 필요한 양
-		double neededE = (simE >= 100.0) ? 0.0 : (100.0 - simE);    //적의 행동게이지가 100이 될 때까지 필요한 양
-		double ticksP = neededP / pSpd; //플레이어의 행동게이지가 100이 되기까지 필요한 틱 수
-		double ticksE = neededE / eSpd; //적의 행동게이지가 100이 되기까지 필요한 틱 수
+	for (int i = 0; i < 5; i++) {                                                                        //현재를 기점으로 앞으로의 5턴의 행동 순서 계산
+		double neededP = (simP >= 100.0) ? 0.0 : (100.0 - simP);                 //플레이어의 행동게이지가 100이 될 때까지 필요한 양
+		double neededE = (simE >= 100.0) ? 0.0 : (100.0 - simE);                //적의 행동게이지가 100이 될 때까지 필요한 양
+		double ticksP = neededP / pSpd;                                                          //플레이어의 행동게이지가 100이 되기까지 필요한 틱 수
+		double ticksE = neededE / eSpd;                                                         //적의 행동게이지가 100이 되기까지 필요한 틱 수
 
         if (ticksP <= ticksE) { // 플레이어가 빠르면
             textcolor(11); 
@@ -103,7 +102,7 @@ void drawBattleUI(const Character* player, const Character* enemy, double pGauge
             simP += ticksP * pSpd - 100.0; //플레이어 행동 게이지 소모
 			simE += ticksP * eSpd;         // 적 행동 게이지 증가
         }
-        else { // 적이 빠르면
+        else {                            // 적이 빠르면
             textcolor(12); 
             printf("[%s]", enemy->name);
 			simP += ticksE * pSpd;  // 플레이어 행동 게이지 증가
@@ -145,7 +144,7 @@ void drawBattleUI(const Character* player, const Character* enemy, double pGauge
             // crit_buff는 플레이어에게만 보이도록 이름을 변경
             if (strcmp(activeEffects[i].id, "crit_buff") == 0) {
                 printf("치명타 확룰 증가(%d턴) ", activeEffects[i].remaining);
-            }
+            }//TODO: 버프 이름 구현할것
             else {
                 printf("%s(%d턴) ", activeEffects[i].id, activeEffects[i].remaining);
             }
@@ -173,7 +172,7 @@ void drawBattleUI(const Character* player, const Character* enemy, double pGauge
 int calcDamage(Character* attacker, Character* defender, int* outIsCrit, Character* player) {       //데미지 계산
 
     if (strstr(defender->name, "모기") != NULL && attacker == player) {
-        if (rand() % 100 < 30) {        //모기는 30% 확률로 플레이어의 공격을 회피
+        if (rand() % 100 < 30) {        //30% 확률로 회피
             textcolor(11); // 밝은 청록
             printf(">> %s(이)가 공격을 피했습니다!\n", defender->name);
             textcolor(15);
@@ -222,7 +221,7 @@ int calcDamage(Character* attacker, Character* defender, int* outIsCrit, Charact
     return damage;
 }
 
-int findItemIndexInInventoryById(const char* id) {                          //아이템 ID로 인벤토리 내 아이템 인덱스 찾기
+int findItemIndexInInventoryById(const char* id) {      //인벤토리 내 아이템 인덱스 찾기
     for (int i = 0; i < playerInventory.count; i++) {
         if (strcmp(playerInventory.items[i].id, id) == 0) {
             return i;
@@ -236,7 +235,8 @@ int acquiredBlessingCount = 0;      //획득한 축복 개수
 
 int hasBlessingById(const char* id) {
     for (int i = 0; i < acquiredBlessingCount; i++) {
-        if (strcmp(acquiredBlessings[i], id) == 0) return 1;
+        if (strcmp(acquiredBlessings[i], id) == 0) 
+            return 1;
     }
     return 0;
 }
@@ -346,7 +346,7 @@ void applyPassiveItemsToPlayer_fixed(Character* player) { //패시브 아이템 
     }
 }
 
-void revertPassiveItemsFromPlayer_fixed(Character* player) { // new
+void revertPassiveItemsFromPlayer_fixed(Character* player) { 
     if (passive_ddak_applied) {
         player->spd += ddak_spd_change;
         player->def -= ddak_def_change;
@@ -359,7 +359,7 @@ void revertPassiveItemsFromPlayer_fixed(Character* player) { // new
 
 int forcedHeadsRemaining = 0; //남은 동전 앞면 횟수
 
-void showInventoryMenu(Character* player) { // new
+void showInventoryMenu(Character* player) { 
     while (1) {
         printf("---- 인벤토리 ----\n");
         if (playerInventory.count == 0) {
@@ -374,14 +374,18 @@ void showInventoryMenu(Character* player) { // new
         printf("[0] 취소\n");
         printf("사용할 아이템 번호 입력: ");
         char buf[32];
-        if (!fgets(buf, sizeof(buf), stdin)) return;
+        if (!fgets(buf, sizeof(buf), stdin))
+            return;
         int sel = 0;
-        if (sscanf(buf, "%d", &sel) != 1) continue;
-        if (sel == 0) return;
-        if (sel < 1 || sel > playerInventory.count) continue;
+        if (sscanf(buf, "%d", &sel) != 1) 
+            continue;
+        if (sel == 0) 
+            return;
+        if (sel < 1 || sel > playerInventory.count) 
+            continue;
         int idx = sel - 1;
         Item chosen = playerInventory.items[idx];
-        if (strcmp(chosen.id, "bandage") == 0) { // 붕대 : 즉시 회복
+        if (strcmp(chosen.id, "bandage") == 0) {            // 붕대 : 즉시 회복
             useItem_bandage(player);
             if (chosen.consumable)
                 removeItemFromInventoryByIndex(idx);
@@ -628,13 +632,12 @@ void applyBlessingSimple(Character* player, const Blessing* b, const Item allIte
     acquiredBlessingCount++;
 
     if (strcmp(b->id, "gen_getItem") == 0) {
-        int itemIdx = rand() % 8; // 8은 initItems에 정의된 아이템 총 개수
+        int itemIdx = rand() % 8; // 아이템 총 개수
         addItemToInventory(&allItems[itemIdx]);
         printf("축복 효과로 [%s] 획득!\n", allItems[itemIdx].name);
     }
 
     if (strcmp(b->id, "gen_halfHP_atkUP") == 0) {
-        // atkPercent = 2.5 
         player->atk = (int)(player->atk * b->atkPercent);
     }
 
@@ -710,7 +713,7 @@ void processEnemyAction(Character* enemy, Character* player) {      //적 행동
 
     if (strcmp(enemy->name, "보스") == 0) {       // 보스 패턴
 
-        if (enemy->hp <= enemy->maxHp / 2 && enemy->patternCount == 0) {// 체력이 50% 이하면 광폭화
+        if (enemy->hp <= enemy->maxHp / 2 && enemy->patternCount == 0) {        // 광폭화
             enemy->patternCount = 1; // 광폭화 완료
             enemy->atk += 10;       //공증
             enemy->spd += 5;        //속증
@@ -1009,7 +1012,7 @@ int main(void) {
                 }
                 Sleep(700);
 
-                playerGauge -= gaugeThreshold; // 행동게이지 100 소모
+                playerGauge -= gaugeThreshold;              // 행동게이지 100 소모
                 tickActiveEffects(&player);    // 지속 턴 효과 감소
                 if (player.defenseCooldown > 0)     // 방어 쿨타임 감소
                     player.defenseCooldown--;
@@ -1031,7 +1034,7 @@ int main(void) {
                     textcolor(10); printf("딱정벌레 펜던트의 효과로 HP %d 회복!\n", heal); textcolor(15);
                 }
                 Sleep(700);
-                enemyGauge -= gaugeThreshold; // 행동게이지 100 소모
+                enemyGauge -= gaugeThreshold;               // 행동게이지 100 소모
 
                 if (player.hp <= 0)
                     break; // 플레이어가 죽으면 종료
