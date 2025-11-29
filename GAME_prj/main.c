@@ -803,10 +803,10 @@ int main(void) {
     playerInventory.count = 0; // 인벤토리 초기화
     addItemToInventory(&allItems[0]); // bandage 붕대
 
-    addItemToInventory(&allItems[1]); // energy 에너지드링크
-    addItemToInventory(&allItems[4]); // redpend 붉은 펜던트
-    addItemToInventory(&allItems[5]); // ddakpend 딱정벌레 펜던트
-	addItemToInventory(&allItems[6]);   // chip 도박사의 칩
+   // addItemToInventory(&allItems[1]); // energy 에너지드링크
+    //addItemToInventory(&allItems[4]); // redpend 붉은 펜던트
+    //addItemToInventory(&allItems[5]); // ddakpend 딱정벌레 펜던트
+	//addItemToInventory(&allItems[6]);   // chip 도박사의 칩
 
     Character player;
     printf("여행자여.. 당신의 이름은 무엇인가?\n      >>");
@@ -925,7 +925,7 @@ int main(void) {
         }
 
 
-        //int playerTurnFirst = (player.spd >= enemy.spd) ? 1 : 0;       //v.1.2에서 행동게이지 시스템 도입으로 폐기
+        //int playerTurnFirst = (player.spd >= enemy.spd) ? 1 : 0;       //v1.2에서 행동게이지 시스템 도입으로 폐기
 
         double playerGauge = 0.0;       //각 행게 초기화
         double enemyGauge = 0.0;
@@ -1172,23 +1172,21 @@ int main(void) {
         if (all_dmg >= 900) {
 			textcolor(13);
 			printf("S+\n\n");
-        }
-        else if (all_dmg >= 700) {
+        }else if (all_dmg >= 700) {
             textcolor(13);
             printf("S\n\n");
-        }
-        else if (all_dmg >=600) {
+        }else if (all_dmg >=600) {
 			//노란색
 			textcolor(14);
 			printf("A+\n\n");
-        }
-        else if (all_dmg >= 400) {
+        }else if (all_dmg >= 400) {
 			textcolor(14);
-			printf("A\n\n");
+			printf("A\n\n");    
         }
-        else if(all_dmg<400)
+        else {
             textcolor(11);
-		    printf("B\n\n");
+            printf("B\n\n");
+        }
     }
     textcolor(15);
     printf("게임 종료\n");
