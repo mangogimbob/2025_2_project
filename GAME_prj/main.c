@@ -812,7 +812,7 @@ int main(void) {
 	//addItemToInventory(&allItems[6]);   // chip 도박사의 칩
 
     Character player;
-    printf("여행자여.. 당신의 이름은 무엇인가?\n      >>");
+    printf("당신의 이름은?\n      >>");
     fgets(player.name, sizeof(player.name), stdin);
     player.name[strcspn(player.name, "\n")] = '\0';
 
@@ -879,7 +879,7 @@ int main(void) {
         pickedIndices[i] = idx;          // 뽑은 숫자 기록
         candidates[i] = allBless[idx];   // 후보에 추가
     }
-    printf("\n이중에서 하나 가져가게..\n");
+    printf("\n시작 축복을 선택하십시오\n");
     for (int i = 0; i < 3; i++) {
         printf("[%d] %s (", i + 1, candidates[i].ext);
         if (strcmp(candidates[i].grade, "일반") == 0)
